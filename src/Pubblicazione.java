@@ -32,7 +32,7 @@ public class Pubblicazione {
             } catch(Exception e) {
                 errore = true;
                 System.out.println("ERRORE: " + e.getMessage());
-                input.nextLine();
+                
             }
         } while(!flag);
     }
@@ -109,7 +109,7 @@ public class Pubblicazione {
             } catch(Exception e) {
                 errore = true;
                 System.out.println("ERRORE: " + e.getMessage());
-                input.nextLine();
+               
             }
         } while(!flag);
     }
@@ -118,24 +118,25 @@ public class Pubblicazione {
         return copieVendute;
     }
 
-    public void setCopieVendute(int copieVendute) {
+    public void setCopieVendute(String copieVendute) {
         boolean flag = false, errore = false;
         
         do {
             try {
                 if(errore) {
                     System.out.print("Reinserire copieVendute: ");
-                    copieVendute = input.nextInt();
-                } else if(copieVendute <= 0 || copieVendute > copieRicevute) {
+                    copieVendute = input.nextLine();
+                } else if(Integer.parseInt(copieVendute) <= 0 || Integer.parseInt(copieVendute)> copieRicevute) {
                     System.out.print("Reinserire numero copie vendute positivo e maggiore delle copie ricevute (" + copieRicevute + "): ");
-                    copieVendute = input.nextInt();
+                    copieVendute = input.nextLine();
                 }
-                this.copieVendute = copieVendute;
+                this.copieVendute = Integer.parseInt(copieVendute);
                 flag = true;
+
             } catch(Exception e) {
                 errore = true;
-                System.out.println(e.getMessage());
-                input.nextLine();
+                System.out.println("ERRORE" + e.getMessage());
+            
             }
         } while(!flag);
     }
