@@ -7,7 +7,7 @@ public class Pubblicazione {
     private double prezzo;
     private int aggio;
     private int copieVendute;
-
+//com prova
     Scanner input = new Scanner(System.in);
 
     public String getNome() {
