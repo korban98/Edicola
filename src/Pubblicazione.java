@@ -22,13 +22,16 @@ public class Pubblicazione {
                 if(errore) {
                     System.out.print("Reinserire nome: ");
                     nome = input.nextLine();
-                } 
+                } else if(nome.length() < 3) {
+                    System.out.print("Reinserire nome di almeno 3 caratteri: ");
+                    nome = input.nextLine();
+                }
                 contieneNumeri(nome);
                 this.nome = nome;
                 flag = true;
-            } catch(InputMismatchException e) {
+            } catch(Exception e) {
                 errore = true;
-                System.out.println(e.getMessage());
+                System.out.println("ERRORE: " + e.getMessage());
                 input.nextLine();
             }
         } while(!flag);
@@ -38,24 +41,23 @@ public class Pubblicazione {
         return copieRicevute;
     }
 
-    public void setCopieRicevute(int copieRicevute) {
+    public void setCopieRicevute(String copieRicevute) {
         boolean flag = false, errore = false;
         
         do {
             try {
                 if(errore) {
                     System.out.print("Reinserire numero copie ricevute valido: ");
-                    copieRicevute = input.nextInt();
-                } else if(copieRicevute <= 0) {
+                    copieRicevute = input.nextLine();
+                } else if(Integer.parseInt(copieRicevute) <= 0) {
                     System.out.print("Reinserire numero copie ricevute positivo: ");
-                    copieRicevute = input.nextInt();
+                    copieRicevute = input.nextLine();
                 }
-                this.copieRicevute = copieRicevute;
+                this.copieRicevute = Integer.parseInt(copieRicevute);
                 flag = true;
-            } catch(InputMismatchException e) {
+            } catch(Exception e) {
                 errore = true;
-                System.out.println(e.getMessage());
-                input.nextLine();
+                System.out.println("ERRORE: " + e.getMessage());
             }
         } while(!flag);
     }
@@ -64,24 +66,23 @@ public class Pubblicazione {
         return prezzo;
     }
 
-    public void setPrezzo(double prezzo) {
+    public void setPrezzo(String prezzo) {
         boolean flag = false, errore = false;
         
         do {
             try {
                 if(errore) {
                     System.out.print("Reinserire prezzo: ");
-                    prezzo = input.nextInt();
-                } else if(prezzo <= 0) {
+                    prezzo = input.nextLine();
+                } else if(Double.parseDouble(prezzo) <= 0) {
                     System.out.print("Reinserire un prezzo positivo: ");
-                    prezzo = input.nextInt();
+                    prezzo = input.nextLine();
                 }
-                this.prezzo = prezzo;
+                this.prezzo = Double.parseDouble(prezzo);
                 flag = true;
-            } catch(InputMismatchException e) {
+            } catch(Exception e) {
                 errore = true;
-                System.out.println(e.getMessage());
-                input.nextLine();
+                System.out.println("ERRORE: " + e.getMessage());
             }
         } while(!flag);
     }
@@ -104,7 +105,7 @@ public class Pubblicazione {
                 }
                 this.aggio = aggio;
                 flag = true;
-            } catch(InputMismatchException e) {
+            } catch(Exception e) {
                 errore = true;
                 System.out.println(e.getMessage());
                 input.nextLine();
@@ -130,7 +131,7 @@ public class Pubblicazione {
                 }
                 this.copieVendute = copieVendute;
                 flag = true;
-            } catch(InputMismatchException e) {
+            } catch(Exception e) {
                 errore = true;
                 System.out.println(e.getMessage());
                 input.nextLine();

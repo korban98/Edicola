@@ -26,7 +26,7 @@ public class EdicolaAvanzataTest {
                         System.out.print("Inserire nome pubblicazione (almeno 3 caratteri): ");
                         nuovaPubblicazione.setNome(inputString.nextLine());
                         System.out.print("Inserire quantità di copie ricevute: ");
-                        nuovaPubblicazione.setCopieRicevute(inputNum.nextInt());
+                        nuovaPubblicazione.setCopieRicevute(inputString.nextLine());
                         System.out.print("Inserire prezzo di copertina: ");
                         nuovaPubblicazione.setPrezzo(inputNum.nextDouble());
                         System.out.print("Inserire percentuale di aggio (da 5% a 20%): ");
