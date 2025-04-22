@@ -1,14 +1,35 @@
+package bean;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Pubblicazione {
+public class Quotidiano {
+    private int id;
     private String nome;
     private int copieRicevute;
     private double prezzo;
     private int aggio;
     private int copieVendute;
-//com prova
+    
     Scanner input = new Scanner(System.in);
+
+    public Quotidiano() {}
+
+    public Quotidiano(int id, String nome, int copieRicevute, double prezzo, int aggio, int copieVendute) {
+        setId(id);
+        setNome(nome);
+        setCopieRicevute(nome);
+        setPrezzo(nome);
+        setAggio(nome);
+        setCopieVendute(nome);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;
@@ -109,7 +130,6 @@ public class Pubblicazione {
             } catch(Exception e) {
                 errore = true;
                 System.out.println("ERRORE: " + e.getMessage());
-               
             }
         } while(!flag);
     }
@@ -136,7 +156,6 @@ public class Pubblicazione {
             } catch(Exception e) {
                 errore = true;
                 System.out.println("ERRORE" + e.getMessage());
-            
             }
         } while(!flag);
     }

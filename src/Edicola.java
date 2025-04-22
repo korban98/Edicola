@@ -1,20 +1,22 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class EdicolaAvanzata {
-    private ArrayList<Pubblicazione> pubblicazioni;
+import bean.Quotidiano;
+
+public class Edicola {
+    private ArrayList<Quotidiano> pubblicazioni;
 
     Scanner input = new Scanner(System.in);
 
-    public EdicolaAvanzata() {
+    public Edicola() {
         pubblicazioni = new ArrayList<>();
     }
 
-    public ArrayList<Pubblicazione> getPubblicazioni() {
+    public ArrayList<Quotidiano> getPubblicazioni() {
         return pubblicazioni;
     }
 
-    public void addPubblicazione(Pubblicazione pubblicazione) {
+    public void addPubblicazione(Quotidiano pubblicazione) {
         pubblicazioni.add(pubblicazione);
     }
 
@@ -22,7 +24,7 @@ public class EdicolaAvanzata {
         double guadagnoTotale = 0;
 
         if(!pubblicazioni.isEmpty()) {
-            for(Pubblicazione pubblicazione : pubblicazioni) {
+            for(Quotidiano pubblicazione : pubblicazioni) {
                 System.out.println("Nome pubblicazione: " + pubblicazione.getNome());
                 System.out.println("Numero copie vendute: " + pubblicazione.getCopieVendute());
                 System.out.println("Numero copie da rendere: " + getCopieDaRendere(pubblicazione) + "\n");
@@ -44,10 +46,10 @@ public class EdicolaAvanzata {
 
     public void rimuoviTerminati() {
         if(!pubblicazioni.isEmpty()) {
-            ArrayList<Pubblicazione> temp = new ArrayList<>(pubblicazioni);
+            ArrayList<Quotidiano> temp = new ArrayList<>(pubblicazioni);
             int i = 0;
 
-            for(Pubblicazione pubblicazione : temp) {
+            for(Quotidiano pubblicazione : temp) {
                 if(getCopieDaRendere(pubblicazione) == 0) {
                     pubblicazioni.remove(pubblicazione);
                     i++;
@@ -65,7 +67,7 @@ public class EdicolaAvanzata {
 
         if(!pubblicazioni.isEmpty()) {
             System.out.println("PUBBLICAZIONI:");
-            for(Pubblicazione pubblicazione : pubblicazioni) {
+            for(Quotidiano pubblicazione : pubblicazioni) {
                 System.out.println(++i + ". " + pubblicazione.getNome());
             }
 
@@ -93,11 +95,11 @@ public class EdicolaAvanzata {
         }
     }
 
-    private int getCopieDaRendere(Pubblicazione pubblicazione) {
+    private int getCopieDaRendere(Quotidiano pubblicazione) {
         return pubblicazione.getCopieRicevute() - pubblicazione.getCopieVendute();
     }
 
-    private double getGuadagno(Pubblicazione pubblicazione) {
+    private double getGuadagno(Quotidiano pubblicazione) {
         return (pubblicazione.getPrezzo() * pubblicazione.getAggio() / 100) * pubblicazione.getCopieVendute();
     }
 }

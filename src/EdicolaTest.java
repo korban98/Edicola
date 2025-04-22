@@ -1,12 +1,14 @@
 import java.util.Scanner;
 
-public class EdicolaAvanzataTest {
+import bean.Quotidiano;
+
+public class EdicolaTest {
     public static void main(String[] args) throws Exception {
         char termina = 'N';
         int select;
         boolean errore = false, aperto = true;
 
-        EdicolaAvanzata miaEdicola = new EdicolaAvanzata();
+        Edicola miaEdicola = new Edicola();
 
         Scanner inputString = new Scanner(System.in);
         Scanner inputNum = new Scanner(System.in);
@@ -21,7 +23,7 @@ public class EdicolaAvanzataTest {
             switch(select) {
                 case 1:
                     do {
-                        Pubblicazione nuovaPubblicazione = new Pubblicazione();
+                        Quotidiano nuovaPubblicazione = new Quotidiano();
             
                         System.out.print("Inserire nome pubblicazione (almeno 3 caratteri): ");
                         nuovaPubblicazione.setNome(inputString.nextLine());
