@@ -91,23 +91,24 @@ public class Pubblicazione {
         return aggio;
     }
 
-    public void setAggio(int aggio) {
+    public void setAggio(String aggio) {
         boolean flag = false, errore = false;
         
         do {
             try {
                 if(errore) {
-                    System.out.print("Reinserire aggio: ");
-                    aggio = input.nextInt();
-                } else if(aggio <= 0) {
+                    System.out.print("Reinserire aggio da 5% a 20%: ");
+                    aggio = input.nextLine();
+                } else if(Integer.parseInt(aggio) <= 0) {
                     System.out.print("Reinserire un aggio positivo: ");
-                    aggio = input.nextInt();
+                    aggio = input.nextLine();
                 }
-                this.aggio = aggio;
+                this.aggio = Integer.parseInt(aggio);
                 flag = true;
+
             } catch(Exception e) {
                 errore = true;
-                System.out.println(e.getMessage());
+                System.out.println("ERRORE: " + e.getMessage());
                 input.nextLine();
             }
         } while(!flag);
