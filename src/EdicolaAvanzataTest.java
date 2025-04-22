@@ -28,11 +28,11 @@ public class EdicolaAvanzataTest {
                         System.out.print("Inserire quantità di copie ricevute: ");
                         nuovaPubblicazione.setCopieRicevute(inputString.nextLine());
                         System.out.print("Inserire prezzo di copertina: ");
-                        nuovaPubblicazione.setPrezzo(inputNum.nextDouble());
+                        nuovaPubblicazione.setPrezzo(inputString.nextLine());
                         System.out.print("Inserire percentuale di aggio (da 5% a 20%): ");
-                        nuovaPubblicazione.setAggio(inputNum.nextInt());
+                        nuovaPubblicazione.setAggio(inputString.nextLine());
                         System.out.print("Inserire quantità di copie vendute: ");
-                        nuovaPubblicazione.setCopieVendute(inputNum.nextInt());
+                        nuovaPubblicazione.setCopieVendute(inputString.nextLine());
             
                         miaEdicola.addPubblicazione(nuovaPubblicazione);
             

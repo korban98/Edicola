@@ -77,16 +77,16 @@ public class EdicolaAvanzata {
             } while(select < 1 || select > pubblicazioni.size());
 
             System.out.print("Qnt. ricevute memorizzate: " + pubblicazioni.get(select-1).getCopieRicevute() + " => " + "Qnt. attualmente ricevute: ");
-            pubblicazioni.get(select-1).setCopieRicevute(input.nextInt());
+            pubblicazioni.get(select-1).setCopieRicevute(input.nextLine());
 
             System.out.print("Prezzo memorizzato: " + pubblicazioni.get(select-1).getPrezzo() + " => " + "Prezzo attuale: ");
-            pubblicazioni.get(select-1).setPrezzo(input.nextDouble());
+            pubblicazioni.get(select-1).setPrezzo(input.nextLine());
 
             System.out.print("Aggio memorizzato: " + pubblicazioni.get(select-1).getAggio() + " => " + "Aggio attuale: ");
-            pubblicazioni.get(select-1).setAggio(input.nextInt());
+            pubblicazioni.get(select-1).setAggio(input.nextLine());
 
             System.out.print("Qnt. vendute memorizzate: " + pubblicazioni.get(select-1).getCopieVendute() + " => " + "Qnt. attualemnte vendute: ");
-            pubblicazioni.get(select-1).setCopieVendute(input.nextInt());
+            pubblicazioni.get(select-1).setCopieVendute(input.nextLine());
             System.out.println();
         } else {
             System.out.println("Non sono presenti pubblicazioni in magazzino\n");
