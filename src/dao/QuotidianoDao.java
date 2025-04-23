@@ -50,8 +50,12 @@ public class QuotidianoDao {
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     return new Quotidiano(
-                        rs.getInt("id_genere"),
-                        rs.getString("nome")
+                        rs.getInt("id"),
+                        rs.getString("nome"),
+                        rs.getInt("cricevute"),
+                        rs.getDouble("prezzo"),
+                        rs.getInt("aggio"),
+                        rs.getInt("cvendute")
                     );
                 }
             }

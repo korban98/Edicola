@@ -20,8 +20,6 @@ public class Edicola {
         pubblicazioni.add(pubblicazione);
     }
 
-
-
 public void printResoconto() {
         double guadagnoTotale = 0;
 
