@@ -27,15 +27,15 @@ public class QuotidianoDao {
         }
     }
 
-    public void updateRicevuteEVendute(Quotidiano quotidiano) throws SQLException {
+    public void updateRicevuteEVendute(int id, int ricevute, int vendute) throws SQLException {
         String sql = "UPDATE quotidiani SET cricevute = ?, cvendute = ? WHERE id = ?";
         
         try (Connection conn = DriverManager.getConnection(url, user, password);
             PreparedStatement stmt = conn.prepareStatement(sql)) {
     
-            stmt.setInt(1, quotidiano.getCopieRicevute());
-            stmt.setInt(2, quotidiano.getCopieVendute());
-            stmt.setInt(3, quotidiano.getId());
+            stmt.setInt(1, ricevute);
+            stmt.setInt(2, vendute);
+            stmt.setInt(3, id);
     
             stmt.executeUpdate();
         }
@@ -81,7 +81,7 @@ public class QuotidianoDao {
     }
 
     public Double selectRendiconto() throws SQLException {
-        String sql = "SELECT SUM(prezzo_singolo * cvendute) AS rendiconto FROM quotidiani WHERE cvendute > 0";
+        String sql = "SELECT SUM(prezzo * cvendute) AS rendiconto FROM quotidiani WHERE cvendute > 0";
 
         try (Connection conn = DriverManager.getConnection(url, user, password);
             Statement stmt = conn.createStatement();
@@ -110,13 +110,13 @@ public class QuotidianoDao {
         } 
     }
 
-    public void modificaPrezzo(Quotidiano quotidiani) throws SQLException {
-        String sql = "UPDATE quotidiani SET prezzo = ? WHERE cvendute = 0 AND nome=?";
+    public void modificaPrezzo(int id, double prezzo) throws SQLException {
+        String sql = "UPDATE quotidiani SET prezzo = ? WHERE cvendute = 0 AND id=?";
         try (
             Connection conn = DriverManager.getConnection(url, user, password);
             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setDouble(1, quotidiani.getPrezzo());
-            stmt.setString(2, quotidiani.getNome());
+            stmt.setDouble(1, prezzo);
+            stmt.setInt(2, id);
             double result=stmt.executeUpdate();
             if (result > 0) {
                 System.out.println("Prezzo aggiornato correttamente");
@@ -126,17 +126,32 @@ public class QuotidianoDao {
         }
     }
 
-    public void modificaAggio(Quotidiano quotidiani) throws SQLException {
-        String sql = "UPDATE quotidiani SET aggio = ? WHERE cvendute = 0 AND nome=?";
+    public void modificaAggio(int id, int aggio) throws SQLException {
+        String sql = "UPDATE quotidiani SET aggio = ? WHERE cvendute = 0 AND id=?";
    
         try (
             Connection conn = DriverManager.getConnection(url, user, password);
             PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setInt(1, quotidiani.getAggio());
-            stmt.setString(2, quotidiani.getNome());
+            stmt.setInt(1, aggio);
+            stmt.setInt(2, id);
             int result=stmt.executeUpdate();
             if (result > 0) {
                 System.out.println("Aggio aggiornato correttamente");
+            } else {
+                System.out.println("Errore nell'aggiornamento");
+            }
+        }
+    }
+
+    public void reset() throws SQLException {
+        String sql = "UPDATE quotidiani SET cricevute = 0 AND cvendute = 0";
+   
+        try (
+            Connection conn = DriverManager.getConnection(url, user, password);
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+            int result=stmt.executeUpdate();
+            if (result > 0) {
+                System.out.println("reset effettuato correttamente");
             } else {
                 System.out.println("Errore nell'aggiornamento");
             }

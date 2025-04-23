@@ -1,14 +1,12 @@
 import java.util.Scanner;
 import bean.Quotidiano;
 import dao.QuotidianoDao;
-import java.util.ArrayList;
-import java.util.List;
 
 public class EdicolaTest {
 
     public static void main(String[] args) throws Exception {
         char termina = 'N';
-        int select;
+        int select, id;
         boolean errore = false, aperto = true;
 
         QuotidianoDao qDao = new QuotidianoDao();
@@ -53,20 +51,50 @@ public class EdicolaTest {
                     } while(termina != 'N');
                     break;
                 case 2:
-                    List<Quotidiano> quotidiani = new ArrayList<>();
-                    int index = 1;
-
                     qDao.selectAll();
+                    System.out.print("Inserisci id pubblicazione da gestire: ");
+                    id = inputNum.nextInt();
+                    do {
+                        System.out.println("SUB-MENU:");
+                        System.out.println("1. Inserire copie ricevute");
+                        System.out.println("2. Incrementare copie vendute");
+                        System.out.println("3. Modificare prezzo");
+                        System.out.println("4. Modificare aggio");
+                        System.out.println("5. Reset di inizio giornata");
+                        System.out.println("6. Torna al MENU\n");
+                        System.out.print("Scegli una voce dal sub-menu': ");
+                        select = inputNum.nextInt();
+                        System.out.println();
+                    } while(select < 1 || select > 6);
 
-                    if (!quotidiani.isEmpty()) {
-                        System.out.println("RESOCONTO ATTUALE:");
-                        for (Quotidiano q : quotidiani) {
-                            System.out.println(index + ") " + q);
-                            index++;
-                        }
-                       // gestionePubblicazione(quotidiani);
-                    } else {
-                        System.out.println("Non sono presenti pubblicazioni nel Database");
+                    switch (select) {
+                        case 1:
+                            System.out.print("Inserire copie ricevute: ");
+                            int ricevute = inputNum.nextInt();
+                            System.out.print("Inserire copie vendute: ");
+                            int vendute = inputNum.nextInt();
+                            qDao.updateRicevuteEVendute(id, ricevute, vendute);
+                            break;
+                        case 2:
+                            qDao.incrementaCvendute(id);
+                            break;
+                        case 3:
+                            System.out.print("Inserire prezzo: ");
+                            double prezzo = inputNum.nextDouble();
+                            qDao.modificaPrezzo(id, prezzo);
+                            break;
+                        case 4:
+                            System.out.print("Inserire aggio: ");
+                            int aggio = inputNum.nextInt();
+                            qDao.modificaAggio(id, aggio);
+                            break;
+                        case 5:
+                            qDao.reset();
+                            break;
+                        case 6:
+                            break;
+                        default:
+                            break;
                     }
                     break;
                 case 3:
@@ -74,7 +102,7 @@ public class EdicolaTest {
                     System.out.println("€ " + qDao.selectRendiconto()); 
                     break;
                 case 4:
-                    
+                    qDao.selectAll();
                     break;
                 case 5:
                     aperto = false;
