@@ -81,18 +81,20 @@ public class QuotidianoDao {
     }
 
     public Double selectRendiconto() throws SQLException {
-        String sql = "SELECT SUM(prezzo * cvendute) AS rendiconto FROM quotidiani WHERE cvendute > 0";
+        String sql = "SELECT nome, cricevute, cvendute, (prezzo * cvendute) AS totale_per_quot FROM quotidiani WHERE cvendute > 0";
+        double totale = 0;
 
         try (Connection conn = DriverManager.getConnection(url, user, password);
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
-                return rs.getDouble("rendiconto");
+                System.out.println(rs.getString("nome") + " - cvendute: " + rs.getInt("cvendute") + " - cricevute: " + rs.getInt("cricevute") + " - Rese: " + (rs.getInt("cricevute")-rs.getInt("cvendute")) + " - Tot per quot.: " + rs.getDouble("totale_per_quot"));
+                totale += rs.getDouble("totale_per_quot");
             }
         }
 
-        return 0.0;
+        return totale;
     }
 
     public void insert(Quotidiano quotidiano) throws SQLException {

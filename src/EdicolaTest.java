@@ -99,7 +99,7 @@ public class EdicolaTest {
                     break;
                 case 3:
                     System.out.println("RENDICONTO GIORNALIERO:");
-                    System.out.println(qDao.selectRendiconto() + " euro"); 
+                    qDao.selectRendiconto();
                     break;
                 case 4:
                     qDao.selectAll();
