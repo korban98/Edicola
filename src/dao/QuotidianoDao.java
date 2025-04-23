@@ -53,32 +53,20 @@ public class QuotidianoDao {
     }
     
     public void incrementaCvendute(int id) throws SQLException {
-        String selectSql = "SELECT cricevute, cvendute FROM quotidiani WHERE id = ?";
-        String updateSql = "UPDATE quotidiani SET cvendute = cvendute + 1 WHERE id = ?";
+        String updateSql = "UPDATE quotidiani SET cvendute = cvendute + 1 WHERE id = ? AND cvendute < cricevute";
     
         try (Connection conn = DriverManager.getConnection(url, user, password);
-            PreparedStatement selectStmt = conn.prepareStatement(selectSql)) {
+             PreparedStatement updateStmt = conn.prepareStatement(updateSql)) {
     
-            selectStmt.setInt(1, id);
-            ResultSet rs = selectStmt.executeQuery();
+            updateStmt.setInt(1, id);
+            int rowsUpdated = updateStmt.executeUpdate();
     
-            if (rs.next()) {
-                int ricevute = rs.getInt("cricevute");
-                int vendute = rs.getInt("cvendute");
-    
-                if (vendute < ricevute) {
-                    try (PreparedStatement updateStmt = conn.prepareStatement(updateSql)) {
-                        updateStmt.setInt(1, id);
-                        updateStmt.executeUpdate();
-                    }
-                } else {
-                    System.out.println("Impossibile incrementare: tutte le copie ricevute sono giÃ state vendute.");
-                }
-            } else {
-                System.out.println("Quotidiano non trovato con id = " + id);
+            if (rowsUpdated == 0) {
+                System.out.println("Impossibile incrementare: tutte le copie sono già vendute o l'id non esiste.");
             }
         }
     }
+    
 
     public Double selectRendiconto() throws SQLException {
         String sql = "SELECT nome, cricevute, cvendute, (prezzo * cvendute) AS totale_per_quot FROM quotidiani WHERE cvendute > 0";

@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 import bean.Quotidiano;
 import dao.QuotidianoDao;
@@ -6,8 +7,8 @@ public class EdicolaTest {
 
     public static void main(String[] args) throws Exception {
         char termina = 'N';
-        int select, id;
-        boolean errore = false, aperto = true;
+        int select = 0, id;
+        boolean errore = false, aperto = true, inputValido = false;
 
         QuotidianoDao qDao = new QuotidianoDao();
 
@@ -16,6 +17,7 @@ public class EdicolaTest {
 
         while (aperto) {
             do {
+                if(errore) System.out.println("\nERRORE: inserimento non valido.\n");
                 System.out.println("MENU:");
                 System.out.println("1. Aggiungere una pubblicazione");
                 System.out.println("2. Gestisci una pubblicazione");
@@ -23,9 +25,17 @@ public class EdicolaTest {
                 System.out.println("4. Eliminare pubblicazione");
                 System.out.println("5. Chiudi\n");
                 System.out.print("Scegli una voce dal menu': ");
-                select = inputNum.nextInt();
-                System.out.println();
-            } while (select < 1 || select > 4);
+                try{
+                    select = inputNum.nextInt();
+                    inputValido = true;
+                }catch(InputMismatchException e){
+                    inputNum.nextLine();
+                    errore = true;
+                }
+            } while (!inputValido);
+
+            errore = false;
+            inputValido = false;
 
             switch (select) {
                 case 1:
@@ -53,6 +63,7 @@ public class EdicolaTest {
                     System.out.print("Inserisci id pubblicazione da gestire: ");
                     id = inputNum.nextInt();
                     do {
+                        if (errore) System.out.println("\nERRORE: inserimento non valido.\n");
                         System.out.println("SUB-MENU:");
                         System.out.println("1. Inserire copie ricevute");
                         System.out.println("2. Incrementare copie vendute");
@@ -61,9 +72,14 @@ public class EdicolaTest {
                         System.out.println("5. Reset di inizio giornata");
                         System.out.println("6. Torna al MENU\n");
                         System.out.print("Scegli una voce dal sub-menu': ");
-                        select = inputNum.nextInt();
-                        System.out.println();
-                    } while(select < 1 || select > 6);
+                        try {
+                            select = inputNum.nextInt();
+                            inputValido = true;
+                        } catch (InputMismatchException e) {
+                            inputNum.nextLine(); 
+                            errore = true;
+                        }
+                    } while(!inputValido || select < 1 || select > 6);
 
                     switch (select) {
                         case 1:
@@ -92,6 +108,7 @@ public class EdicolaTest {
                         case 6:
                             break;
                         default:
+                            System.out.println("\nERRORE: valori possibili da 1 a 6\n");
                             break;
                     }
                     break;
@@ -106,6 +123,7 @@ public class EdicolaTest {
                     aperto = false;
                     break;
                 default:
+                    System.out.println("\nERRORE: valori possibili da 1 a 5\n");
                     break;
             }
         }
