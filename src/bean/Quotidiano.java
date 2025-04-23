@@ -14,6 +14,15 @@ public class Quotidiano {
 
     public Quotidiano() {}
 
+    public Quotidiano(int id, String nome, int copieRicevute, double prezzo, int aggio, int copieVendute) {
+        this.id = id;
+        this.nome = nome;
+        this.copieRicevute = copieRicevute;
+        this.prezzo = prezzo;
+        this.aggio = aggio;
+        this.copieVendute = copieVendute;
+    }
+
     public int getId() {
         return id;
     }
