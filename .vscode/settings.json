@@ -2,6 +2,8 @@
     "java.project.sourcePaths": ["src"],
     "java.project.outputPath": "bin",
     "java.project.referencedLibraries": [
-        "lib/**/*.jar"
+        "lib/**/*.jar",
+        "c:\\Users\\bozhy\\OneDrive\\Робочий стіл\\DATABASE\\Esercizio-20250422\\Esercizio JDBC + db + connector\\mysql-connector-j-8.0.32.jar",
+        "c:\\Users\\bozhy\\OneDrive\\Робочий стіл\\DATABASE\\Esercizio JDBC + db + connector\\mysql-connector-j-8.0.32.jar"
     ]
 }

@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+/*import java.util.ArrayList;
 import java.util.Scanner;
 
 import bean.Quotidiano;
@@ -102,4 +102,4 @@ public void printResoconto() {
     private double getGuadagno(Quotidiano pubblicazione) {
         return (pubblicazione.getPrezzo() * pubblicazione.getAggio() / 100) * pubblicazione.getCopieVendute();
     }
-}
+}*/

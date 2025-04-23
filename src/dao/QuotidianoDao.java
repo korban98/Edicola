@@ -81,7 +81,7 @@ public class QuotidianoDao {
     }
 
     public Double selectRendiconto() throws SQLException {
-        String sql = "SELECT SUM(prezzo_singolo * cvendute) AS rendiconto FROM quotidiani WHERE cvendute > 0";
+        String sql = "SELECT SUM(prezzo * cvendute) AS rendiconto FROM quotidiani WHERE cvendute > 0";
 
         try (Connection conn = DriverManager.getConnection(url, user, password);
             Statement stmt = conn.createStatement();
