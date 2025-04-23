@@ -33,10 +33,8 @@ public class EdicolaTest {
                         Quotidiano nuovaPubblicazione = new Quotidiano();
             
                         nuovaPubblicazione.setNome();
-                        nuovaPubblicazione.setCopieRicevute();
                         nuovaPubblicazione.setPrezzo();
                         nuovaPubblicazione.setAggio();
-                        nuovaPubblicazione.setCopieVendute();
             
                         qDao.insert(nuovaPubblicazione);
             
