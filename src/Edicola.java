@@ -21,7 +21,6 @@ public class Edicola {
     }
 
 
-
 public void printResoconto() {
         double guadagnoTotale = 0;
 
