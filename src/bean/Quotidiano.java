@@ -153,7 +153,7 @@ public class Quotidiano {
                 if(errore) {
                     System.out.print("ERRORE: ");
                 }
-                System.out.print("Inserire quantità di copie vendute: ");
+                System.out.print("Inserire quantita' di copie vendute: ");
                 copieVendute = input.nextInt();
                 if(copieVendute > 0 && copieVendute <= copieRicevute) {
                     this.copieVendute = copieVendute;
