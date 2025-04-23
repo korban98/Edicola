@@ -39,6 +39,21 @@ public class QuotidianoDao {
         return quotidiani;
     }
 
+    public Double selectRendiconto() throws SQLException {
+        String sql = "SELECT SUM(prezzo_singolo * cvendute) AS rendiconto FROM quotidiani WHERE cvendute > 0";
+
+        try (Connection conn = DriverManager.getConnection(url, user, password);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                return rs.getDouble("rendiconto");
+            }
+        }
+
+        return 0.0;
+    }
+
     public Quotidiano selectGenereById(int id) throws SQLException {
         String sql = "SELECT * FROM genere WHERE id_genere = ?";
 
@@ -64,12 +79,16 @@ public class QuotidianoDao {
         return null; 
     }
 
-    public void insert(Quotidiano genere) throws SQLException {
-        String sql = "INSERT INTO genere(nome) VALUES (?)"; 
+    public void insert(Quotidiano quotidiano) throws SQLException {
+        String sql = "INSERT INTO quotidiani(nome,prezzo,aggio,cricevute,cvendute) VALUES (?,?,?,?,?)"; 
         try (Connection conn = DriverManager.getConnection(url, user, password);
              PreparedStatement stmt = conn.prepareStatement(sql)) {
     
-            stmt.setString(1, genere.getNome());
+            stmt.setString(1, quotidiano.getNome());
+            stmt.setDouble(1, quotidiano.getPrezzo());
+            stmt.setInt(1, quotidiano.getAggio());
+            stmt.setInt(1, quotidiano.getCopieRicevute());
+            stmt.setInt(1, quotidiano.getCopieVendute());
 
             stmt.executeUpdate();
         } 

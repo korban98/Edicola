@@ -25,17 +25,12 @@ public class EdicolaTest {
                     do {
                         Quotidiano nuovaPubblicazione = new Quotidiano();
             
-                        System.out.print("Inserire nome pubblicazione (almeno 3 caratteri): ");
-                        nuovaPubblicazione.setNome(inputString.nextLine());
-                        System.out.print("Inserire quantità di copie ricevute: ");
-                        nuovaPubblicazione.setCopieRicevute(inputString.nextLine());
-                        System.out.print("Inserire prezzo di copertina: ");
-                        nuovaPubblicazione.setPrezzo(inputString.nextLine());
-                        System.out.print("Inserire percentuale di aggio (da 5% a 20%): ");
-                        nuovaPubblicazione.setAggio(inputString.nextLine());
-                        System.out.print("Inserire quantità di copie vendute: ");
-                        nuovaPubblicazione.setCopieVendute(inputString.nextLine());
-            
+                        nuovaPubblicazione.setNome();
+                        nuovaPubblicazione.setCopieRicevute();
+                        nuovaPubblicazione.setPrezzo();
+                        nuovaPubblicazione.setAggio();
+                        nuovaPubblicazione.setCopieVendute();
+
                         miaEdicola.addPubblicazione(nuovaPubblicazione);
             
                         do {

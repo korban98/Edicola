@@ -14,15 +14,6 @@ public class Quotidiano {
 
     public Quotidiano() {}
 
-    public Quotidiano(int id, String nome, int copieRicevute, double prezzo, int aggio, int copieVendute) {
-        setId(id);
-        setNome(nome);
-        setCopieRicevute(nome);
-        setPrezzo(nome);
-        setAggio(nome);
-        setCopieVendute(nome);
-    }
-
     public int getId() {
         return id;
     }
@@ -35,25 +26,23 @@ public class Quotidiano {
         return nome;
     }
 
-    public void setNome(String nome) {
+    public void setNome() {
         boolean flag = false, errore = false;
+        String nome;
         
         do {
             try {
                 if(errore) {
-                    System.out.print("Reinserire nome: ");
-                    nome = input.nextLine();
-                } else if(nome.length() < 3) {
-                    System.out.print("Reinserire nome di almeno 3 caratteri: ");
-                    nome = input.nextLine();
+                    System.out.print("ERRORE: ");
                 }
+                System.out.print("Inserire nome pubblicazione: ");
+                nome = input.nextLine();
                 contieneNumeri(nome);
                 this.nome = nome;
                 flag = true;
             } catch(Exception e) {
                 errore = true;
                 System.out.println("ERRORE: " + e.getMessage());
-                
             }
         } while(!flag);
     }
@@ -62,20 +51,23 @@ public class Quotidiano {
         return copieRicevute;
     }
 
-    public void setCopieRicevute(String copieRicevute) {
+    public void setCopieRicevute() {
         boolean flag = false, errore = false;
-        
+        int copieRicevute;
+
         do {
             try {
                 if(errore) {
-                    System.out.print("Reinserire numero copie ricevute valido: ");
-                    copieRicevute = input.nextLine();
-                } else if(Integer.parseInt(copieRicevute) <= 0) {
-                    System.out.print("Reinserire numero copie ricevute positivo: ");
-                    copieRicevute = input.nextLine();
+                    System.out.print("ERRORE: ");
+                } 
+                System.out.print("Inserire quantità di copie ricevute: ");
+                copieRicevute = input.nextInt();
+                if(copieRicevute > 0) {
+                    this.copieRicevute = copieRicevute;
+                    flag = true;
+                } else {
+                    errore = true;
                 }
-                this.copieRicevute = Integer.parseInt(copieRicevute);
-                flag = true;
             } catch(Exception e) {
                 errore = true;
                 System.out.println("ERRORE: " + e.getMessage());
@@ -87,20 +79,23 @@ public class Quotidiano {
         return prezzo;
     }
 
-    public void setPrezzo(String prezzo) {
+    public void setPrezzo() {
         boolean flag = false, errore = false;
+        double prezzo;
         
         do {
             try {
                 if(errore) {
-                    System.out.print("Reinserire prezzo: ");
-                    prezzo = input.nextLine();
-                } else if(Double.parseDouble(prezzo) <= 0) {
-                    System.out.print("Reinserire un prezzo positivo: ");
-                    prezzo = input.nextLine();
+                    System.out.print("ERRORE: ");
+                } 
+                System.out.print("Inserire prezzo di copertina: ");
+                prezzo = input.nextDouble();
+                if(prezzo > 0) {
+                    this.prezzo = prezzo;
+                    flag = true;
+                } else {
+                    errore = true;
                 }
-                this.prezzo = Double.parseDouble(prezzo);
-                flag = true;
             } catch(Exception e) {
                 errore = true;
                 System.out.println("ERRORE: " + e.getMessage());
@@ -112,21 +107,23 @@ public class Quotidiano {
         return aggio;
     }
 
-    public void setAggio(String aggio) {
+    public void setAggio() {
         boolean flag = false, errore = false;
+        int aggio;
         
         do {
             try {
                 if(errore) {
-                    System.out.print("Reinserire aggio da 5% a 20%: ");
-                    aggio = input.nextLine();
-                } else if(Integer.parseInt(aggio) <= 0) {
-                    System.out.print("Reinserire un aggio positivo: ");
-                    aggio = input.nextLine();
+                    System.out.print("ERRORE: ");
+                } 
+                System.out.print("Inserire percentuale di aggio (da 5% a 20%): ");
+                aggio = input.nextInt();
+                if(aggio > 0) {
+                    this.aggio = aggio;
+                    flag = true;
+                } else {
+                    errore = true; 
                 }
-                this.aggio = Integer.parseInt(aggio);
-                flag = true;
-
             } catch(Exception e) {
                 errore = true;
                 System.out.println("ERRORE: " + e.getMessage());
@@ -138,21 +135,23 @@ public class Quotidiano {
         return copieVendute;
     }
 
-    public void setCopieVendute(String copieVendute) {
+    public void setCopieVendute() {
         boolean flag = false, errore = false;
+        int copieVendute;
         
         do {
             try {
                 if(errore) {
-                    System.out.print("Reinserire copieVendute: ");
-                    copieVendute = input.nextLine();
-                } else if(Integer.parseInt(copieVendute) <= 0 || Integer.parseInt(copieVendute)> copieRicevute) {
-                    System.out.print("Reinserire numero copie vendute positivo e maggiore delle copie ricevute (" + copieRicevute + "): ");
-                    copieVendute = input.nextLine();
+                    System.out.print("ERRORE: ");
                 }
-                this.copieVendute = Integer.parseInt(copieVendute);
-                flag = true;
-
+                System.out.print("Inserire quantità di copie vendute: ");
+                copieVendute = input.nextInt();
+                if(copieVendute > 0 && copieVendute <= copieRicevute) {
+                    this.copieVendute = copieVendute;
+                    flag = true;
+                } else {
+                    errore = true;
+                }
             } catch(Exception e) {
                 errore = true;
                 System.out.println("ERRORE" + e.getMessage());
